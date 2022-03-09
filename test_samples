@@ -1,0 +1,14 @@
+
+// As a user, I should be able to submit questions.
+curl -X POST  -H "content-type: application/json" -d '{ "title" : "first question","text" : "How to center a div within a div?", "tags": [ {"text": "golang"} ] }' http://localhost:8080/v1/question
+
+curl -X POST  -H "content-type: application/json" -d '{ "title" : "first question","text" : "How to center a div within a div?" }' http://localhost:8080/v1/question
+
+
+// As a user, I should be able to answer submitted questions.
+
+curl -X PUT  -H "content-type: application/json" -d '{"text" : "this is simple. just do x and y."}' http://localhost:8080/v1/question/3/answer
+
+// As a user, I should be able to assign multiple tags to questions.
+
+curl -X PUT  -H "content-type: application/json" -d '{"text" : "Python"}' http://localhost:8080/v1/question/3/tag

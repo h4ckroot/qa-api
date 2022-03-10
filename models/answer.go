@@ -17,8 +17,7 @@ func CreateAnswer(answer *Answer) (err error) {
 type Answer struct {
 	ID         uint   `json:"id"`
 	Text       string `json:"text"`
-	QuestionID uint
-	Question   Question
+	QuestionID uint   `json:"-"`
 }
 
 func (b *Answer) TableName() string {

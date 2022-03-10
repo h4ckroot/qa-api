@@ -6,5 +6,5 @@ func (b *Tag) TableName() string {
 
 type Tag struct {
 	ID   uint   `json:"id"`
-	Text string `json:"text" gorm:"unique"`
+	Text string `json:"text"`
 }

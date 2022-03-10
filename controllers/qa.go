@@ -72,7 +72,24 @@ func UpdateQuestionWithTag(c *gin.Context) {
 	}
 	models.TagQuestion(&question, &tag)
 }
+
 func GetQuestion(c *gin.Context) {
+	questionId, err := strconv.Atoi(c.Param("id"))
+	var question models.Question
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	// get Question
+	if err = config.GetDB().First(&question, questionId).Error; err != nil {
+		log.Error().Msg("could not fetch question")
+		c.AbortWithStatus(http.StatusNotFound)
+		return
+	} else {
+		config.GetDB().Preload("Tags").Preload("Answers").Find(&question)
+		c.JSON(http.StatusOK, question)
+		return
+	}
 
 }
 
@@ -81,9 +98,9 @@ func DeleteQuestion(c *gin.Context) {
 }
 
 func IsHealthy(c *gin.Context) {
-	c.JSON(http.StatusOK, "")
+	c.JSON(http.StatusOK, "OK")
 }
 
 func IsReady(c *gin.Context) {
-	c.JSON(http.StatusOK, "")
+	c.JSON(http.StatusOK, "OK")
 }

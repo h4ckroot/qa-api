@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qa-api-config
+data:
+  config.yaml: |
+    server:
+      port: ":8080"
+    env:
+{{ toYaml .Values.env | indent 6 }}
+    db:
+      host: "test-db"
+      port: 5432
+      username: postgres
+      password: {{ .Values.db.postgresqlPassword }}
+      name: qa

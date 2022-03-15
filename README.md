@@ -53,7 +53,7 @@ docker-compose up -d
 
 ```
 
-cd helm/deploy/qa-api
+cd deploy/helm/qa-api
 
 helm --namespace <namespace> install test .
 
